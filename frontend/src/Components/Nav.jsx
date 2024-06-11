@@ -1,8 +1,14 @@
+import { useMemo } from 'react';
 import { FaSearch, FaSync} from 'react-icons/fa';
+import { useVerify } from './Verify';
 
 export function NavComponent() {
+  const handleClick =  ()=>{
+    localStorage.setItem("token", "no");
+    useVerify();
+  }
   return (
-    <div className='flex justify-around items-center bg-gray-50 h-16 border-b-2 border-y-slate-400 '>
+    <div className='flex justify-around items-center bg-gray-50 h-nav border-b-2 border-y-slate-400 '>
       <div>
         <h2 className='text-xl font-semibold text-gray-600'>Keeps</h2>
       </div>
@@ -12,6 +18,7 @@ export function NavComponent() {
       </div>
       <div>
         <button><FaSync></FaSync></button>
+        <button onClick={handleClick}>logout</button>
       </div>
     </div>
   );

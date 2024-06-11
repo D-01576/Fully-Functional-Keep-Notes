@@ -7,10 +7,10 @@ async function shownote(req,res,next){
 
     const notes = userr.notes;
     console.log(notes)
-    res.json({
-        status: "success",
-        notes: notes
-    })
+        res.json({
+            status: "success",
+            notes: notes
+        })
 }
 
 module.exports ={

@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Verify } from "./Verify";
+import React, { useEffect, useState } from "react";
+import { useVerify } from "./Verify";
 
 export function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const token = localStorage.getItem("token");
+    useEffect(()=>{
+        useVerify()
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,15 +17,15 @@ export function Signin() {
             });
             if (response.data.status === "Success") {
                 localStorage.setItem("token", response.data.token);
-                alert("success")
-                return;
-            }          
-            alert("Something went wrong")  
+                alert("Success");
+            } else {
+                alert("Something went wrong");
+            }
+            useVerify();
     };
 
     return (
         <div>
-            <Verify></Verify>
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -41,7 +43,7 @@ export function Signin() {
                             </div>
                             <button onClick={handleSubmit} type="button" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don't have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                                Don't have an account yet? <a href="/signup" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                             </p>
                         </form>
                     </div>

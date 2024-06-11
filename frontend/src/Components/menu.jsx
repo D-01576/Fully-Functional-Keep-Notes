@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaBell, FaTrash } from 'react-icons/fa';
 import { TiEdit } from 'react-icons/ti';
+import { useNavigate } from 'react-router-dom';
 
 export function Menu() {
-    const [selectedItem, setSelectedItem] = useState('edit'); // Default selected item is 'edit'
+    const [selectedItem, setSelectedItem] = useState('home');
+    const navigate = useNavigate()
 
     const handleClick = (item) => {
         setSelectedItem(item);
+        navigate(`/${item}`)
     };
 
     return (
-        <div className='flex flex-col bg-gray-200 w-80 h-screen'>
+        <div className='flex flex-col bg-gray-200 w-menu h-menu'>
             <div 
-                className={`flex items-center w-64 h-12 pl-2 rounded-t-lg cursor-pointer ${selectedItem === 'edit' ? 'bg-orange-100 shadow-md' : ''}`} 
-                onClick={() => handleClick('edit')}
+                className={`flex items-center w-64 h-12 pl-2 rounded-t-lg cursor-pointer ${selectedItem === 'home' ? 'bg-orange-100 shadow-md' : ''}`} 
+                onClick={() => handleClick('home')}
             >
                 <TiEdit className="mr-2" />
                 <h2>Notes</h2>
             </div>
             <div 
-                className={`flex items-center w-64 h-12 pl-2 rounded-t-lg cursor-pointer ${selectedItem === 'bell' ? 'bg-orange-100 shadow-md' : ''}`} 
-                onClick={() => handleClick('bell')}
+                className={`flex items-center w-64 h-12 pl-2 rounded-t-lg cursor-pointer ${selectedItem === 'reminder' ? 'bg-orange-100 shadow-md' : ''}`} 
+                onClick={() => handleClick('reminder')}
             >
                 <FaBell className="mr-2" />
                 <h2>Reminders</h2>

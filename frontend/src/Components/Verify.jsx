@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import axios from "axios";
-
-export function Verify() {
+export function useVerify() {
     const token = localStorage.getItem("token");
-    useEffect(() => {
-        // alert("ok")
+    // const url = useRecoilValue(CurentUrl);
+    // useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:3000/home/notes", {
@@ -12,17 +11,24 @@ export function Verify() {
                         authorization: token
                     }
                 });
-                if (response.data) {
-                    window.location.href = "/home";
+                if (response.data.status === "success") {
+                    if(window.location.href === "http://localhost:5173/signin" || window.location.href === "http://localhost:5173/signup"){
+                window.location.href = "/home";
+                    }
                 }
                 else{
                     window.location.href = "/signin";
                 }
             } catch (error) {
-                console.error("Error:", error);
+                if(window.location.href === "http://localhost:5173/signin" || window.location.href === "http://localhost:5173/signup"){
+                // window.location.href = "/signin";
+            }
+            else{
+                window.location.href = "/signin";
+            }
+            // alert(window.location.href)
             }
         };
         fetchData();
-    }, [token]);
     console.log(token)
 }
