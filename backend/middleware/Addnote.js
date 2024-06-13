@@ -16,12 +16,16 @@ async function addnote(req,res,next){
     }
     
     const userr = await user.findOne({email: email});
-    const id = userr.notes.length + 1;
-    await userr.updateOne({ $push: { notes: { id: id, title: title, text: text} } });
+    console.log(userr.notes.length)
+    await userr.updateOne({ $push: { notes: {title: title, text: text} } });
+    const newdetail = await user.findOne({email: email});
+    const id = newdetail.notes[newdetail.notes.length-1]._id;
+    console.log(id)
 
     res.json({
         status: "Success",
-        message: "Added"
+        message: "Added",
+        id: id
     })
 }
 

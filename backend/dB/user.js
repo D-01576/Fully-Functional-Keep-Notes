@@ -10,9 +10,9 @@ mongoose.connect(MONGO_URI)
 const user = mongoose.model("user",{
     email: String,
     password: String,
-    notes : [{id : Number, title : String, text : String}],
+    notes : [{title : String, text : String}],
     Inremind : [{id : Number, remindtime : Date}],
-    trash : [{id : Number, title : String, text : String, removetime:Date}]
+    trash : [{id : String, title : String, text : String, removetime:Date}]
 });
 module.exports = {
     user

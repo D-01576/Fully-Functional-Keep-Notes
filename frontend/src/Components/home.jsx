@@ -9,7 +9,7 @@ export function Home(){
         useVerify()
     },[])
     return (
-        <div className="flex flex-col items-center justify-center w-other">
+        <div className="flex flex-col items-center justify-center w-other h-menu">
             <AddNote></AddNote>
             <ShowNotes></ShowNotes>
         </div>

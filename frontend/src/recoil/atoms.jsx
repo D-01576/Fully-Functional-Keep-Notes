@@ -19,6 +19,7 @@ export const Notes = atom({
                         Authorization: token
                     }
                 });
+                console.log(res.data);
                 return res.data.notes;
             } catch (error) {
                 console.error("Error fetching notes:", error);

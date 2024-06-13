@@ -13,7 +13,7 @@ export default {
       },
       width: {
         'nav' : '28vw',
-        'other': "72vw"
+        'other': "82vw"
       }
     },
   },

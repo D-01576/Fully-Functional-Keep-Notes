@@ -19,10 +19,10 @@ export function AddNote(){
         }
     },[title,note])
 
-    const handleclick = ()=>{
+    const handleclick = async ()=>{
         const token = localStorage.getItem("token")
             try{
-                const res = axios.post("http://localhost:3000/home/addnote",{
+                const res = await axios.post("http://localhost:3000/home/addnote",{
                     title : title,
                     text : note
                 },{
@@ -30,9 +30,11 @@ export function AddNote(){
                         Authorization : token
                     }
                 })
+                console.log(res.data.id);
                 setrecoilnote((prevnote) => [...prevnote, {title : title,
-                    text : note}]);
-                alert("done")
+                text : note, _id: res.data.id}]);
+                setnote("")
+                settitle("")
             }
             catch{
                 alert("can not")
@@ -49,9 +51,11 @@ export function AddNote(){
             <input value={title} onChange={(e)=>{
                 settitle(e.target.value)
             }} className="outline-none" type="text" placeholder="title"/>
-            <input value={note}  onChange={(e)=>{
+            <textarea  value={note}  onChange={(e)=>{
                 setnote(e.target.value)
-            }} className="outline-none w-80 h-12" type="text" placeholder="Take a note"/>
+                e.target.style.height = 'auto';
+                e.target.style.height = (e.target.scrollHeight) + 'px';
+            }} className="outline-none w-80 h-auto resize-none " type="text" placeholder="Take a note"/>
             <div className={`${valid} flex justify-between items-center`}>
                 <div>
                 <button className={``}><FaTrash className="mr-2" /></button>
